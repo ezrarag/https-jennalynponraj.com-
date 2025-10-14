@@ -22,32 +22,53 @@ const HeroSection = () => {
   }, [backgroundImages.length])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
       {/* Background Image Carousel */}
-      <div className="absolute inset-0 z-0">
+      <div 
+        className="absolute z-0"
+        style={{
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%'
+        }}
+      >
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}
-            className="absolute inset-0 w-full h-full"
+            className="absolute z-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 2, ease: "easeInOut" }}
             style={{
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
               backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
+              backgroundRepeat: 'no-repeat',
+              zIndex: 0
             }}
           >
             {/* Dark overlay for better text readability */}
-            <div className="absolute inset-0 bg-black/40" />
+            <div 
+              className="absolute z-0 bg-black/40"
+              style={{
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%'
+              }}
+            />
           </motion.div>
         </AnimatePresence>
       </div>
 
       {/* Content Overlay */}
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto min-h-screen flex flex-col items-center justify-center">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
