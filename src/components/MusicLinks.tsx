@@ -87,7 +87,7 @@ const MusicLinks = () => {
                       {platform.name}
                     </h3>
                     
-                    <p className="text-gray-600 text-sm font-medium tracking-wide uppercase">
+                    <p className="text-gray-600 text-sm font-links font-bold tracking-wide uppercase">
                       {platform.description}
                     </p>
                   </div>

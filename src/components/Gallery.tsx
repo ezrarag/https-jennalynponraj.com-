@@ -103,7 +103,7 @@ const Gallery = () => {
         >
           <a
             href="#contact"
-            className="inline-flex items-center px-8 py-3 border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300 font-medium tracking-wide"
+            className="inline-flex items-center px-8 py-3 border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300 font-links font-bold tracking-wide"
           >
             View Full Gallery
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

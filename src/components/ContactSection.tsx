@@ -30,7 +30,7 @@ const ContactSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center px-8 py-4 bg-white text-black hover:bg-gray-200 transition-all duration-300 font-medium tracking-wide text-lg"
+              className="inline-flex items-center px-8 py-4 bg-white text-black hover:bg-gray-200 transition-all duration-300 font-links font-bold tracking-wide text-lg"
             >
               <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

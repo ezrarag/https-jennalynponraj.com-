@@ -13,8 +13,9 @@ const config: Config = {
         foreground: 'var(--foreground)',
       },
       fontFamily: {
+        'sans': ['Playfair Display', 'serif'],
         'serif': ['Playfair Display', 'serif'],
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'links': ['var(--font-poppins)', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',

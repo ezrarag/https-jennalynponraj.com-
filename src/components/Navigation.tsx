@@ -44,7 +44,7 @@ const Navigation = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="text-white hover:text-gray-300 px-3 py-2 text-sm font-medium transition-colors duration-300"
+                  className="text-white hover:text-gray-300 px-3 py-2 text-sm font-links font-bold transition-colors duration-300"
                 >
                   {item.name}
                 </motion.a>
@@ -102,7 +102,7 @@ const Navigation = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-white hover:text-gray-300 block px-3 py-2 text-base font-medium transition-colors"
+                  className="text-white hover:text-gray-300 block px-3 py-2 text-base font-links font-bold transition-colors"
                 >
                   {item.name}
                 </motion.a>
