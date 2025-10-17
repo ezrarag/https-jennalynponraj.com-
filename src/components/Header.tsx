@@ -72,7 +72,7 @@ const Header = () => {
       case 'bio':
         return (
           <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={5}>
+            <Grid size={{ xs: 12, md: 5 }}>
               <Box
                 component="img"
                 src="/bio.jpg"
@@ -90,7 +90,7 @@ const Header = () => {
                 }}
               />
             </Grid>
-            <Grid item xs={12} md={7}>
+            <Grid size={{ xs: 12, md: 7 }}>
               <Typography variant="h4" gutterBottom sx={{ color: 'white', mb: 3 }}>
                 {bioContent.title}
               </Typography>
@@ -127,7 +127,7 @@ const Header = () => {
             </Typography>
             <Grid container spacing={3}>
               {actingVideos.map((video, index) => (
-                <Grid item xs={12} sm={6} key={index}>
+                <Grid size={{ xs: 12, sm: 6 }} key={index}>
                   <Card sx={{ 
                     background: 'rgba(255,255,255,0.05)', 
                     borderRadius: 2,
@@ -263,7 +263,7 @@ const Header = () => {
             </Typography>
             <Grid container spacing={3}>
               {writingPieces.map((piece, index) => (
-                <Grid item xs={12} md={6} key={index}>
+                <Grid size={{ xs: 12, md: 6 }} key={index}>
                   <Card sx={{ 
                     background: 'rgba(255,255,255,0.05)', 
                     borderRadius: 2,
