@@ -12,7 +12,7 @@ const HeroSection = () => {
   ]
 
   useEffect(() => {
-    const getRandomInterval = () => Math.floor(Math.random() * (80 - 65 + 1)) + 65 // 65-80 seconds
+    const getRandomInterval = () => Math.floor(Math.random() * (9 - 7 + 1)) + 7 // 7-9 seconds
     
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length)
@@ -69,90 +69,19 @@ const HeroSection = () => {
 
       {/* Content Overlay */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto min-h-screen flex flex-col items-center justify-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight"
-        >
-          Jennalyn Ponraj
-        </motion.h1>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-lg sm:text-xl md:text-2xl text-gray-300 font-light tracking-wide mb-8"
-        >
-          Maverick Artist & Founder
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <a
-            href="#work"
-            className="px-8 py-3 border border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300 font-links font-bold tracking-wide"
-          >
-            View Work
-          </a>
-          <a
-            href="#music"
-            className="px-8 py-3 bg-white text-black hover:bg-gray-200 transition-all duration-300 font-links font-bold tracking-wide"
-          >
-            Listen Now
-          </a>
-        </motion.div>
-      </div>
-
-      {/* Subtle sparkle animation */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[
-          { left: 20, top: 15, delay: 0 },
-          { left: 80, top: 25, delay: 0.5 },
-          { left: 15, top: 70, delay: 1 },
-          { left: 90, top: 60, delay: 1.5 },
-          { left: 50, top: 85, delay: 2 },
-          { left: 70, top: 10, delay: 2.5 }
-        ].map((sparkle, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full"
-            style={{
-              left: `${sparkle.left}%`,
-              top: `${sparkle.top}%`,
-            }}
-            animate={{
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: sparkle.delay,
-            }}
-          />
-        ))}
+        {/* Hero content can be added here later - keeping it clean for now */}
       </div>
 
       {/* Social Media Links - Bottom Right */}
-      <div className="absolute bottom-8 right-8 z-20">
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="flex flex-col gap-4"
-        >
+      <div className="fixed bottom-8 right-8 z-50">
+        <div className="flex gap-4 bg-black/50 p-4 rounded-lg border border-white/20">
           {/* IMDb */}
           <a
             href="#"
             className="w-12 h-12 rounded-full border border-white/30 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-white/10 hover:border-white/50 transition-all duration-300 group"
             title="IMDb"
           >
-            <span className="text-white text-xs font-links font-bold group-hover:text-gray-300">IMDb</span>
+            <span className="text-white text-xs font-bold group-hover:text-gray-300">IMDb</span>
           </a>
           
           {/* Instagram */}
@@ -183,7 +112,7 @@ const HeroSection = () => {
             className="w-12 h-12 rounded-full border border-white/30 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-white/10 hover:border-white/50 transition-all duration-300 group"
             title="Email"
           >
-            <span className="text-white text-lg font-links font-bold group-hover:text-gray-300">@</span>
+            <span className="text-white text-lg font-bold group-hover:text-gray-300">@</span>
           </a>
           
           {/* LinkedIn */}
@@ -192,7 +121,7 @@ const HeroSection = () => {
             className="w-12 h-12 rounded-full border border-white/30 bg-white/5 backdrop-blur-sm flex items-center justify-center hover:bg-white/10 hover:border-white/50 transition-all duration-300 group"
             title="LinkedIn"
           >
-            <span className="text-white text-xs font-links font-bold group-hover:text-gray-300">in</span>
+            <span className="text-white text-xs font-bold group-hover:text-gray-300">in</span>
           </a>
           
           {/* YouTube */}
@@ -227,7 +156,7 @@ const HeroSection = () => {
               <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/>
             </svg>
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

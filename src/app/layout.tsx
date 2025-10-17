@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
+import MuiThemeProvider from '@/components/MuiThemeProvider';
 
 const poppins = Poppins({ 
   subsets: ['latin'], 
@@ -27,7 +28,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className={`${poppins.variable} font-sans antialiased bg-black text-white`}>
-        {children}
+        <MuiThemeProvider>
+          {children}
+        </MuiThemeProvider>
       </body>
     </html>
   )
