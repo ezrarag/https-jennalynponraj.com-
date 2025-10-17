@@ -8,11 +8,13 @@ const HeroSection = () => {
   
   const backgroundImages = [
     'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/jennalyn%2FJennalyn%20main%20site%20mood%20board.png?alt=media&token=cc957b4b-ef9c-4116-8dd5-29c791b03c29',
-    'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/jennalyn%2F2%20-%20Jennalyn%20main%20site%20mood%20board.png?alt=media&token=0caa404c-14f5-476d-979b-6623d032b410'
+    'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/jennalyn%2F2%20-%20Jennalyn%20main%20site%20mood%20board.png?alt=media&token=0caa404c-14f5-476d-979b-6623d032b410',
+    'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/jennalyn%2FJennalyn%20-%20Portfolio%20Site%20-%20horse.png?alt=media&token=a53d52c8-8bc4-45b9-bbb1-956cdc846b31',
+    'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/jennalyn%2FJennalyn%20-%20Portfolio%20Site%20-%20apocolypse.png?alt=media&token=f86eb9da-d162-490d-a6bc-54b11319f5b4'
   ]
 
   useEffect(() => {
-    const getRandomInterval = () => Math.floor(Math.random() * (9 - 7 + 1)) + 7 // 7-9 seconds
+    const getRandomInterval = () => Math.floor(Math.random() * (4 - 3 + 1)) + 3 // 3-4 seconds
     
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length)
