@@ -18,10 +18,12 @@ import {
 } from '@mui/material'
 import { Close as CloseIcon } from '@mui/icons-material'
 import { gsap } from 'gsap'
-import { bioContent, actingVideos, musicContent, voSamples, writingPieces } from '@/data/sections'
+import { motion, AnimatePresence } from 'framer-motion'
+import { bioContent, actingVideos, musicContent, voSamples, writingPieces, newsPressArticles, magazineSpread } from '@/data/sections'
 
 const Header = () => {
   const [openOverlay, setOpenOverlay] = useState<string | null>(null)
+  const [bioView, setBioView] = useState<'bio' | 'news' | 'magazine'>('bio')
   const headerRef = useRef<HTMLElement>(null)
 
   const menuItems = [
@@ -64,59 +66,389 @@ const Header = () => {
     }
   }, [openOverlay])
 
-  const handleOverlayOpen = (itemId: string) => setOpenOverlay(itemId)
+  const handleOverlayOpen = (itemId: string) => {
+    setOpenOverlay(itemId)
+    if (itemId === 'bio') {
+      setBioView('bio')
+    }
+  }
   const handleOverlayClose = () => setOpenOverlay(null)
 
   const renderSectionContent = (sectionId: string) => {
     switch (sectionId) {
       case 'bio':
         return (
-          <Grid container spacing={4} alignItems="center">
-            <Grid size={{ xs: 12, md: 5 }}>
-              <Box
-                component="img"
-                src="/bio.jpg"
-                alt="Jennalyn portrait"
-                sx={{ 
-                  width: '100%', 
-                  borderRadius: 2,
-                  maxWidth: 300,
-                  margin: '0 auto',
-                  display: 'block'
-                }}
-                onError={(e) => {
-                  // Fallback if image doesn't exist
-                  e.currentTarget.style.display = 'none'
-                }}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, md: 7 }}>
-              <Typography variant="h4" gutterBottom sx={{ color: 'white', mb: 3 }}>
-                {bioContent.title}
-              </Typography>
-              <Typography 
-                variant="h6" 
-                sx={{ 
-                  color: 'rgba(255,255,255,0.9)', 
-                  fontStyle: 'italic',
-                  mb: 3,
-                  fontSize: '1.25rem'
+          <Box>
+            {/* Toggle Buttons */}
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+              <Button
+                onClick={() => setBioView('bio')}
+                sx={{
+                  color: bioView === 'bio' ? 'white' : 'rgba(255,255,255,0.6)',
+                  borderBottom: bioView === 'bio' ? '2px solid white' : '2px solid transparent',
+                  borderRadius: 0,
+                  padding: '8px 24px',
+                  fontSize: '1.1rem',
+                  fontWeight: bioView === 'bio' ? 600 : 300,
+                  textTransform: 'none',
+                  '&:hover': {
+                    backgroundColor: 'transparent',
+                    color: 'white'
+                  }
                 }}
               >
-                "{bioContent.pullQuote}"
-              </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  color: 'rgba(255,255,255,0.8)', 
-                  lineHeight: 1.8,
-                  fontSize: '1.1rem'
+                Bio
+              </Button>
+              <Button
+                onClick={() => setBioView('news')}
+                sx={{
+                  color: bioView === 'news' ? 'white' : 'rgba(255,255,255,0.6)',
+                  borderBottom: bioView === 'news' ? '2px solid white' : '2px solid transparent',
+                  borderRadius: 0,
+                  padding: '8px 24px',
+                  fontSize: '1.1rem',
+                  fontWeight: bioView === 'news' ? 600 : 300,
+                  textTransform: 'none',
+                  '&:hover': {
+                    backgroundColor: 'transparent',
+                    color: 'white'
+                  }
                 }}
               >
-                {bioContent.content}
-              </Typography>
-            </Grid>
-          </Grid>
+                News + Press
+              </Button>
+              <Button
+                onClick={() => setBioView('magazine')}
+                sx={{
+                  color: bioView === 'magazine' ? 'white' : 'rgba(255,255,255,0.6)',
+                  borderBottom: bioView === 'magazine' ? '2px solid white' : '2px solid transparent',
+                  borderRadius: 0,
+                  padding: '8px 24px',
+                  fontSize: '1.1rem',
+                  fontWeight: bioView === 'magazine' ? 600 : 300,
+                  textTransform: 'none',
+                  '&:hover': {
+                    backgroundColor: 'transparent',
+                    color: 'white'
+                  }
+                }}
+              >
+                Magazine Spread
+              </Button>
+            </Box>
+
+            {/* Content Area with Framer Motion */}
+            <Box sx={{ position: 'relative', minHeight: '400px' }}>
+              <AnimatePresence mode="wait">
+                {bioView === 'bio' && (
+                  <motion.div
+                    key="bio"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                  >
+                    <Grid container spacing={4} alignItems="center">
+                      <Grid size={{ xs: 12, md: 5 }}>
+                        <Box
+                          component="img"
+                          src="/bio.jpg"
+                          alt="Jennalyn portrait"
+                          sx={{ 
+                            width: '100%', 
+                            borderRadius: 2,
+                            maxWidth: 300,
+                            margin: '0 auto',
+                            display: 'block'
+                          }}
+                          onError={(e) => {
+                            // Fallback if image doesn't exist
+                            e.currentTarget.style.display = 'none'
+                          }}
+                        />
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 7 }}>
+                        <Typography variant="h4" gutterBottom sx={{ color: 'white', mb: 3 }}>
+                          {bioContent.title}
+                        </Typography>
+                        <Typography 
+                          variant="h6" 
+                          sx={{ 
+                            color: 'rgba(255,255,255,0.9)', 
+                            fontStyle: 'italic',
+                            mb: 3,
+                            fontSize: '1.25rem'
+                          }}
+                        >
+                          "{bioContent.pullQuote}"
+                        </Typography>
+                        <Typography 
+                          variant="body1" 
+                          sx={{ 
+                            color: 'rgba(255,255,255,0.8)', 
+                            lineHeight: 1.8,
+                            fontSize: '1.1rem'
+                          }}
+                        >
+                          {bioContent.content}
+                        </Typography>
+                        
+                        {/* Subtle News + Press Link */}
+                        <Box sx={{ mt: 3, opacity: 0.3, transition: 'opacity 0.3s ease' }}>
+                          <Button
+                            onClick={() => setBioView('news')}
+                            sx={{
+                              color: 'rgba(255,255,255,0.4)',
+                              fontSize: '0.9rem',
+                              textTransform: 'none',
+                              padding: '4px 8px',
+                              '&:hover': {
+                                backgroundColor: 'transparent',
+                                color: 'rgba(255,255,255,0.7)',
+                                opacity: 1
+                              }
+                            }}
+                          >
+                            View News + Press →
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </motion.div>
+                )}
+                
+                {bioView === 'news' && (
+                  <motion.div
+                    key="news"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                  >
+                    <Box sx={{ position: 'relative' }}>
+                      <Typography variant="h4" gutterBottom sx={{ color: 'white', mb: 4, textAlign: 'center' }}>
+                        News + Press
+                      </Typography>
+                      <Box sx={{ 
+                        maxHeight: '60vh', 
+                        overflowY: 'auto',
+                        paddingRight: '8px',
+                        '&::-webkit-scrollbar': {
+                          width: '6px',
+                        },
+                        '&::-webkit-scrollbar-track': {
+                          background: 'rgba(255,255,255,0.1)',
+                          borderRadius: '3px',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                          background: 'rgba(255,255,255,0.3)',
+                          borderRadius: '3px',
+                          '&:hover': {
+                            background: 'rgba(255,255,255,0.5)',
+                          },
+                        },
+                      }}>
+                        <Grid container spacing={3}>
+                          {newsPressArticles.map((article, index) => (
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
+                              <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4, delay: index * 0.1 }}
+                              >
+                                <Card sx={{ 
+                                  background: 'rgba(255,255,255,0.05)', 
+                                  borderRadius: 2,
+                                  border: '1px solid rgba(255,255,255,0.1)',
+                                  height: '100%',
+                                  display: 'flex',
+                                  flexDirection: 'column'
+                                }}>
+                                  <Box
+                                    component="img"
+                                    src={article.image}
+                                    alt={article.title}
+                                    sx={{ 
+                                      width: '100%', 
+                                      height: 200,
+                                      objectFit: 'cover',
+                                      borderRadius: '8px 8px 0 0'
+                                    }}
+                                    onError={(e) => {
+                                      e.currentTarget.style.display = 'none'
+                                    }}
+                                  />
+                                  <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                                    <Typography variant="h6" sx={{ color: 'white', mb: 1, fontSize: '1rem', lineHeight: 1.3 }}>
+                                      {article.title}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 2, fontSize: '0.85rem' }}>
+                                      Read full article on {article.source}.
+                                    </Typography>
+                                    <Button 
+                                      variant="outlined" 
+                                      size="small"
+                                      href={article.readMore}
+                                      sx={{
+                                        color: 'white',
+                                        borderColor: 'rgba(255,255,255,0.3)',
+                                        fontSize: '0.8rem',
+                                        fontWeight: 'bold',
+                                        textTransform: 'uppercase',
+                                        letterSpacing: '0.05em',
+                                        mt: 'auto',
+                                        '&:hover': {
+                                          borderColor: 'white',
+                                          backgroundColor: 'rgba(255,255,255,0.1)'
+                                        }
+                                      }}
+                                    >
+                                      READ MORE
+                                    </Button>
+                                  </CardContent>
+                                </Card>
+                              </motion.div>
+                            </Grid>
+                          ))}
+                        </Grid>
+                      </Box>
+                      
+                      {/* Blur overlay at bottom */}
+                      <Box sx={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: '60px',
+                        background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.8))',
+                        backdropFilter: 'blur(8px)',
+                        pointerEvents: 'none',
+                        zIndex: 1,
+                        borderRadius: '0 0 8px 8px'
+                      }} />
+                    </Box>
+                  </motion.div>
+                )}
+                
+                {bioView === 'magazine' && (
+                  <motion.div
+                    key="magazine"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                  >
+                    <Box>
+                      <Typography variant="h4" gutterBottom sx={{ color: 'white', mb: 2, textAlign: 'center' }}>
+                        {magazineSpread.title}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 4, textAlign: 'center', fontSize: '0.9rem' }}>
+                        {magazineSpread.subtitle}
+                      </Typography>
+                      
+                      {/* Magazine Gallery */}
+                      <Grid container spacing={2}>
+                        {magazineSpread.images.map((image, index) => (
+                          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={image.id}>
+                            <motion.div
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.4, delay: index * 0.1 }}
+                            >
+                              <Card sx={{ 
+                                background: 'rgba(255,255,255,0.05)', 
+                                borderRadius: 2,
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                overflow: 'hidden',
+                                cursor: 'pointer',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                '&:hover': {
+                                  transform: 'scale(1.02)',
+                                  boxShadow: '0 8px 32px rgba(255,255,255,0.1)'
+                                }
+                              }}>
+                                <Box
+                                  component="img"
+                                  src={image.src}
+                                  alt={image.alt}
+                                  sx={{ 
+                                    width: '100%', 
+                                    height: 200,
+                                    objectFit: 'cover',
+                                    transition: 'filter 0.3s ease',
+                                    '&:hover': {
+                                      filter: 'brightness(1.1)'
+                                    }
+                                  }}
+                                  onError={(e) => {
+                                    e.currentTarget.style.display = 'none'
+                                  }}
+                                />
+                                <CardContent sx={{ padding: '8px 12px' }}>
+                                  <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.7rem' }}>
+                                    {image.description}
+                                  </Typography>
+                                </CardContent>
+                              </Card>
+                            </motion.div>
+                          </Grid>
+                        ))}
+                      </Grid>
+                      
+                      {/* Download Links */}
+                      <Box sx={{ textAlign: 'center', mt: 4 }}>
+                        <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+                          <Button 
+                            variant="outlined"
+                            href={magazineSpread.downloadLinks.freePDF}
+                            target="_blank"
+                            sx={{
+                              color: 'white',
+                              borderColor: 'rgba(255,255,255,0.3)',
+                              fontSize: '0.9rem',
+                              fontWeight: 'bold',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.05em',
+                              padding: '12px 24px',
+                              minWidth: '180px',
+                              '&:hover': {
+                                borderColor: 'white',
+                                backgroundColor: 'rgba(255,255,255,0.1)'
+                              }
+                            }}
+                          >
+                            Free PDF Download
+                          </Button>
+                          <Button 
+                            variant="contained"
+                            href={magazineSpread.downloadLinks.paidVersion}
+                            target="_blank"
+                            sx={{
+                              backgroundColor: 'rgba(255,255,255,0.1)',
+                              color: 'white',
+                              border: '1px solid rgba(255,255,255,0.3)',
+                              fontSize: '0.9rem',
+                              fontWeight: 'bold',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.05em',
+                              padding: '12px 24px',
+                              minWidth: '180px',
+                              '&:hover': {
+                                backgroundColor: 'rgba(255,255,255,0.2)',
+                                borderColor: 'white'
+                              }
+                            }}
+                          >
+                            Buy Print Issue ($34.80)
+                          </Button>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </Box>
+          </Box>
         )
 
       case 'acting':
@@ -338,7 +670,7 @@ const Header = () => {
         <Box className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6">
           <Box className="flex items-end justify-end">
             {/* Always show navigation - responsive sizing */}
-            <Box component="nav" className="flex items-center space-x-2 sm:space-x-4 lg:space-x-6 xl:space-x-8">
+            <Box component="nav" className="flex items-center">
               {menuItems.map((item) => (
                 <Button
                   key={item.name}
@@ -352,14 +684,17 @@ const Header = () => {
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
                     minWidth: 'auto',
-                    padding: '4px 2px',
+                    padding: '8px 12px',
+                    marginRight: '16px',
                     '@media (min-width: 640px)': {
                       fontSize: '0.75rem',
-                      padding: '6px 4px',
+                      padding: '10px 16px',
+                      marginRight: '20px',
                     },
                     '@media (min-width: 1024px)': {
                       fontSize: '0.875rem',
-                      padding: '8px 0',
+                      padding: '12px 20px',
+                      marginRight: '24px',
                     },
                     '&:hover': {
                       color: '#d1d5db',

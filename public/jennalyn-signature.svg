@@ -1,0 +1,13 @@
+<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="handDrawn" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence baseFrequency="0.01" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.5"/>
+    </filter>
+  </defs>
+  
+  <!-- Signature text with hand-drawn style -->
+  <text x="50" y="120" font-family="Brush Script MT, cursive" font-size="48" fill="white" opacity="0.9" filter="url(#handDrawn)">
+    Jennalyn Ponraj
+  </text>
+</svg>

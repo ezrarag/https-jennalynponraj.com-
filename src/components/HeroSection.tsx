@@ -7,10 +7,12 @@ const HeroSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   
   const backgroundImages = [
+    'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/delirare-main-site%2Fhallway%20-%20Jennalyn%20-%20Portfolio%20Site.png?alt=media&token=a3c285b3-bc23-44e9-ba5e-0f8ded945fa6',
     'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/jennalyn%2FJennalyn%20main%20site%20mood%20board.png?alt=media&token=cc957b4b-ef9c-4116-8dd5-29c791b03c29',
     'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/jennalyn%2F2%20-%20Jennalyn%20main%20site%20mood%20board.png?alt=media&token=0caa404c-14f5-476d-979b-6623d032b410',
     'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/jennalyn%2FJennalyn%20-%20Portfolio%20Site%20-%20horse.png?alt=media&token=a53d52c8-8bc4-45b9-bbb1-956cdc846b31',
-    'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/jennalyn%2FJennalyn%20-%20Portfolio%20Site%20-%20apocolypse.png?alt=media&token=f86eb9da-d162-490d-a6bc-54b11319f5b4'
+    'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/jennalyn%2FJennalyn%20-%20Portfolio%20Site%20-%20apocolypse.png?alt=media&token=f86eb9da-d162-490d-a6bc-54b11319f5b4',
+    'https://firebasestorage.googleapis.com/v0/b/readyaimgo-clients-temp.firebasestorage.app/o/delirare-main-site%2FAB730696-8A3D-4D10-BCAB-94831CE0B79F.JPG?alt=media&token=000e98f4-e79a-41ec-b4c0-dd25db1126c6'
   ]
 
   useEffect(() => {
@@ -76,8 +78,17 @@ const HeroSection = () => {
         {/* Hero content can be added here later - keeping it clean for now */}
       </div>
 
-      {/* Social Media Links - Bottom Right */}
-      <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50">
+      {/* Signature + Social Links */}
+      <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 flex flex-col items-end gap-4">
+        <div className="pointer-events-none">
+          <img 
+            src="/jennalyn-signature.svg" 
+            alt="Jennalyn Ponraj Signature" 
+            className="w-64 sm:w-80 lg:w-96 xl:w-[28rem] h-auto opacity-90 hover:opacity-100 transition-opacity duration-300 mix-blend-screen"
+          />
+        </div>
+
+        {/* Social Media Links */}
         <div className="flex gap-2 sm:gap-4 bg-black/50 p-2 sm:p-4 rounded-lg border border-white/20">
           {/* IMDb */}
           <a
