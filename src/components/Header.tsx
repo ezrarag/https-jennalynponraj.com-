@@ -22,7 +22,6 @@ import { bioContent, actingVideos, musicContent, voSamples, writingPieces } from
 
 const Header = () => {
   const [openOverlay, setOpenOverlay] = useState<string | null>(null)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
 
   const menuItems = [
@@ -65,12 +64,8 @@ const Header = () => {
     }
   }, [openOverlay])
 
-  const handleOverlayOpen = (itemId: string) => {
-    setOpenOverlay(itemId)
-    setIsMobileMenuOpen(false) // Close mobile menu when opening overlay
-  }
+  const handleOverlayOpen = (itemId: string) => setOpenOverlay(itemId)
   const handleOverlayClose = () => setOpenOverlay(null)
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
 
   const renderSectionContent = (sectionId: string) => {
     switch (sectionId) {
@@ -342,22 +337,30 @@ const Header = () => {
       >
         <Box className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6">
           <Box className="flex items-end justify-end">
-            {/* Desktop Navigation links - hidden when screen is too small */}
-            <Box component="nav" className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+            {/* Always show navigation - responsive sizing */}
+            <Box component="nav" className="flex items-center space-x-2 sm:space-x-4 lg:space-x-6 xl:space-x-8">
               {menuItems.map((item) => (
                 <Button
                   key={item.name}
                   onClick={() => handleOverlayOpen(item.id)}
-                  className="text-white text-sm font-light tracking-wider uppercase hover:text-gray-300 transition-colors duration-300"
+                  className="text-white text-xs sm:text-sm font-light tracking-wider uppercase hover:text-gray-300 transition-colors duration-300"
                   sx={{
                     color: 'white',
-                    fontSize: '0.875rem',
+                    fontSize: '0.7rem',
                     fontWeight: 300,
                     fontFamily: 'Helvetica, Arial, sans-serif',
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
                     minWidth: 'auto',
-                    padding: '8px 0',
+                    padding: '4px 2px',
+                    '@media (min-width: 640px)': {
+                      fontSize: '0.75rem',
+                      padding: '6px 4px',
+                    },
+                    '@media (min-width: 1024px)': {
+                      fontSize: '0.875rem',
+                      padding: '8px 0',
+                    },
                     '&:hover': {
                       color: '#d1d5db',
                       backgroundColor: 'transparent',
@@ -368,87 +371,8 @@ const Header = () => {
                 </Button>
               ))}
             </Box>
-
-            {/* Hamburger menu for smaller screens */}
-            <Box className="lg:hidden">
-              <Button
-                onClick={toggleMobileMenu}
-                sx={{
-                  color: 'white',
-                  minWidth: 'auto',
-                  padding: '8px',
-                  backgroundColor: 'rgba(255,255,255,0.1)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  borderRadius: '8px',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255,255,255,0.2)',
-                  },
-                }}
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-                  />
-                </svg>
-              </Button>
-            </Box>
           </Box>
         </Box>
-
-        {/* Mobile menu dropdown */}
-        {isMobileMenuOpen && (
-          <Box
-            sx={{
-              position: 'absolute',
-              bottom: '100%',
-              right: '16px',
-              mb: 2,
-              backgroundColor: 'rgba(0,0,0,0.9)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              borderRadius: '12px',
-              padding: '16px',
-              minWidth: '200px',
-              boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
-            }}
-          >
-            <Box component="nav" className="flex flex-col space-y-2">
-              {menuItems.map((item) => (
-                <Button
-                  key={item.name}
-                  onClick={() => handleOverlayOpen(item.id)}
-                  sx={{
-                    color: 'white',
-                    fontSize: '0.875rem',
-                    fontWeight: 300,
-                    fontFamily: 'Helvetica, Arial, sans-serif',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    minWidth: 'auto',
-                    padding: '12px 16px',
-                    justifyContent: 'flex-start',
-                    borderRadius: '8px',
-                    '&:hover': {
-                      color: '#d1d5db',
-                      backgroundColor: 'rgba(255,255,255,0.1)',
-                    },
-                  }}
-                >
-                  {item.name}
-                </Button>
-              ))}
-            </Box>
-          </Box>
-        )}
       </header>
 
       {/* Overlay dialogs for each section */}
