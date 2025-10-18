@@ -342,8 +342,8 @@ const Header = () => {
       >
         <Box className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6">
           <Box className="flex items-end justify-end">
-            {/* Desktop Navigation links */}
-            <Box component="nav" className="hidden md:flex items-center space-x-6 lg:space-x-8">
+            {/* Desktop Navigation links - hidden when screen is too small */}
+            <Box component="nav" className="hidden lg:flex items-center space-x-6 xl:space-x-8">
               {menuItems.map((item) => (
                 <Button
                   key={item.name}
@@ -369,8 +369,8 @@ const Header = () => {
               ))}
             </Box>
 
-            {/* Mobile hamburger menu button */}
-            <Box className="md:hidden">
+            {/* Hamburger menu for smaller screens */}
+            <Box className="lg:hidden">
               <Button
                 onClick={toggleMobileMenu}
                 sx={{

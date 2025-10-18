@@ -14,7 +14,7 @@ const HeroSection = () => {
   ]
 
   useEffect(() => {
-    const getRandomInterval = () => Math.floor(Math.random() * (4 - 3 + 1)) + 3 // 3-4 seconds
+    const getRandomInterval = () => Math.floor(Math.random() * (6 - 5 + 1)) + 5 // 5-6 seconds
     
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length)
@@ -38,7 +38,7 @@ const HeroSection = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}
-            className="absolute z-0"
+            className="absolute z-0 w-full h-full bg-cover bg-center bg-no-repeat carousel-image"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -51,12 +51,7 @@ const HeroSection = () => {
             style={{
               top: 0,
               left: 0,
-              width: '100%',
-              height: '100%',
               backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
               zIndex: 0,
               // Add will-change for better performance
               willChange: 'opacity'
