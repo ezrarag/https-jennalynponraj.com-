@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { 
   Button, 
   Box, 
@@ -18,13 +19,18 @@ import {
 } from '@mui/material'
 import { Close as CloseIcon } from '@mui/icons-material'
 import { gsap } from 'gsap'
-import { motion, AnimatePresence } from 'framer-motion'
 import { bioContent, actingVideos, musicContent, voSamples, writingPieces, newsPressArticles, magazineSpread } from '@/data/sections'
 
 const Header = () => {
   const [openOverlay, setOpenOverlay] = useState<string | null>(null)
   const [bioView, setBioView] = useState<'bio' | 'news' | 'magazine'>('bio')
+  const [isVisible, setIsVisible] = useState(true)
   const headerRef = useRef<HTMLElement>(null)
+
+  const { scrollYProgress } = useScroll()
+  const opacity = useTransform(scrollYProgress, [0, 0.05, 0.15], [0, 1, 0.8])
+  const blur = useTransform(scrollYProgress, [0, 0.1], [0, 10])
+  const y = useTransform(scrollYProgress, [0, 0.1], [0, -10])
 
   const menuItems = [
     { name: 'Bio', href: '#bio', id: 'bio' },
@@ -662,10 +668,14 @@ const Header = () => {
 
   return (
     <>
-      {/* Fixed header positioned in bottom-right corner */}
-      <header 
+      {/* Fixed header positioned in bottom-right corner with scroll-based visibility */}
+      <motion.header 
         ref={headerRef}
         className="fixed bottom-0 right-0 z-50 bg-transparent"
+        style={{ opacity, y, backdropFilter: `blur(${blur}px)` }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1 }}
       >
         <Box className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6">
           <Box className="flex items-end justify-end">
@@ -675,17 +685,18 @@ const Header = () => {
                 <Button
                   key={item.name}
                   onClick={() => handleOverlayOpen(item.id)}
-                  className="text-white text-xs sm:text-sm font-light tracking-wider uppercase hover:text-gray-300 transition-colors duration-300"
+                  className="text-white/90 text-xs sm:text-sm font-light tracking-[0.15em] uppercase hover:text-white transition-all duration-500"
                   sx={{
-                    color: 'white',
+                    color: 'rgba(255,255,255,0.9)',
                     fontSize: '0.7rem',
                     fontWeight: 300,
-                    fontFamily: 'Helvetica, Arial, sans-serif',
-                    letterSpacing: '0.1em',
+                    fontFamily: 'Inter, Helvetica, Arial, sans-serif',
+                    letterSpacing: '0.15em',
                     textTransform: 'uppercase',
                     minWidth: 'auto',
                     padding: '8px 12px',
                     marginRight: '16px',
+                    textShadow: '0 2px 12px rgba(0,0,0,0.4)',
                     '@media (min-width: 640px)': {
                       fontSize: '0.75rem',
                       padding: '10px 16px',
@@ -697,8 +708,9 @@ const Header = () => {
                       marginRight: '24px',
                     },
                     '&:hover': {
-                      color: '#d1d5db',
+                      color: 'white',
                       backgroundColor: 'transparent',
+                      textShadow: '0 2px 20px rgba(255,255,255,0.3)',
                     },
                   }}
                 >
@@ -708,7 +720,7 @@ const Header = () => {
             </Box>
           </Box>
         </Box>
-      </header>
+      </motion.header>
 
       {/* Overlay dialogs for each section */}
       {menuItems.map((item) => (
