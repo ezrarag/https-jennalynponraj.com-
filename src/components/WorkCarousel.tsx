@@ -92,7 +92,9 @@ const WorkCarousel = () => {
                             <path d="M8 5v10l8-5-8-5z" />
                           </svg>
                         </div>
-                        <p className="text-white/40 text-sm">{item.title}</p>
+                        <p className="text-white/40 text-sm">
+                          {'title' in item ? item.title : 'albumTitle' in item ? item.albumTitle : 'Untitled'}
+                        </p>
                       </div>
                     )}
                     {sections[activeSection].type === 'audio' && (
@@ -102,7 +104,9 @@ const WorkCarousel = () => {
                             <path d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM15.657 6.343a1 1 0 011.414 0A9.972 9.972 0 0119 12a9.972 9.972 0 01-1.929 5.657 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 12a7.971 7.971 0 00-1.343-4.243 1 1 0 010-1.414z" />
                           </svg>
                         </div>
-                        <p className="text-white/40 text-sm">{item.title}</p>
+                        <p className="text-white/40 text-sm">
+                          {'title' in item ? item.title : 'albumTitle' in item ? item.albumTitle : 'Untitled'}
+                        </p>
                       </div>
                     )}
                     {sections[activeSection].type === 'text' && (
@@ -112,7 +116,9 @@ const WorkCarousel = () => {
                             <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" />
                           </svg>
                         </div>
-                        <p className="text-white/40 text-sm">{item.title}</p>
+                        <p className="text-white/40 text-sm">
+                          {'title' in item ? item.title : 'albumTitle' in item ? item.albumTitle : 'Untitled'}
+                        </p>
                       </div>
                     )}
                   </div>
@@ -127,10 +133,10 @@ const WorkCarousel = () => {
                   {/* Content Overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
                     <h3 className="text-white font-serif text-xl mb-2">
-                      {item.title}
+                      {'title' in item ? item.title : 'albumTitle' in item ? item.albumTitle : 'Untitled'}
                     </h3>
                     <p className="text-gray-300 text-sm mb-4">
-                      {item.description}
+                      {'description' in item ? item.description : 'excerpt' in item ? item.excerpt : 'No description available'}
                     </p>
                     <div className="flex space-x-2">
                       <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
