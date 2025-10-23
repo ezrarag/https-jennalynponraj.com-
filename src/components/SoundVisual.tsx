@@ -31,8 +31,8 @@ const SoundVisual = () => {
   const textY = useTransform(scrollYProgress, [0, 1], [50, -50])
 
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-transparent py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section ref={ref} className="relative w-full overflow-hidden bg-transparent py-8 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+      <div className="max-w-7xl mx-auto w-full">
         {/* Animated Waveform Background */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center"

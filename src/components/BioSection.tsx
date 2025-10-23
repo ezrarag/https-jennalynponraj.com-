@@ -16,8 +16,8 @@ const BioSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
 
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-transparent px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto py-16">
+    <section ref={ref} className="relative w-full overflow-hidden bg-transparent px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+      <div className="max-w-7xl mx-auto py-16 w-full">
         {/* Press Quote */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}

@@ -41,8 +41,8 @@ const WorkCarousel = () => {
   }
 
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-transparent py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section ref={ref} className="relative w-full overflow-hidden bg-transparent py-8 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+      <div className="max-w-7xl mx-auto w-full">
         {/* Section Navigation */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
